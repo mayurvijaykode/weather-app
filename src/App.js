@@ -15,7 +15,6 @@ export default function App() {
   const [location, setLocation] = useState('');
   const [weather, setWeather] = useState(null);
   const [weatherImage, setWeatherImage] = useState('');
-  let weatherHint = '';
 
   const getWeatherDetails = async () => {
     let response = await fetch(
@@ -30,9 +29,10 @@ export default function App() {
   };
 
   useEffect(() => {
+    let weatherHint = '';
     weatherHint = weather && weather?.weather[0].main;
 
-    // console.log(`for ${location} weather hint is ${weatherHint}`);
+    console.log(`for ${location} weather hint is ${weatherHint}`);
 
     switch (weatherHint) {
       case 'Clouds':
@@ -57,7 +57,10 @@ export default function App() {
     <main>
       <Container style={{ width: '500px' }}>
         <h1>Weather App</h1>
-        <p>Get weather infomration of your desired location</p>
+        <p>
+          Get weather infomration of your desired location. Try entering London,
+          Mumbai, Zurich
+        </p>
         <Row>
           <Col>
             <Form.Control
