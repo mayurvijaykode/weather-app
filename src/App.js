@@ -32,7 +32,7 @@ export default function App() {
   useEffect(() => {
     weatherHint = weather && weather?.weather[0].main;
 
-    console.log(`for ${location} weather hint is ${weatherHint}`);
+    // console.log(`for ${location} weather hint is ${weatherHint}`);
 
     switch (weatherHint) {
       case 'Clouds':
