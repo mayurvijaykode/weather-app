@@ -21,7 +21,7 @@ export default function App() {
   let weatherHint = '';
 
   const getWeatherDetails = async () => {
-    console.info(location);
+    // console.info(location);
     let response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${APIKey}`
     );
