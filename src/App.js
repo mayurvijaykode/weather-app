@@ -70,7 +70,7 @@ export default function App() {
   return (
     <main>
       <Container style={{ maxWidth: '400px' }}>
-        <h1>Weather App</h1>
+        <h1 style={{ textAlign: 'center' }}>Weather App</h1>
         <p>Get weather infomration of your desired location</p>
         <Row>
           <Col>
