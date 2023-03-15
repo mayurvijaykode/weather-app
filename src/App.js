@@ -30,7 +30,12 @@ export default function App() {
 
   useEffect(() => {
     let weatherHint = '';
-    weatherHint = weather && weather?.weather[0] && weather?.weather[0].main;
+    try {
+      weatherHint = weather && weather?.weather[0].main;
+    } catch (error) {
+      console.error('information not found');
+      return;
+    }
 
     console.log(`for ${location} weather hint is ${weatherHint}`);
 
