@@ -71,14 +71,14 @@ export default function App() {
     <main>
       <Container>
         <h1>Weather App</h1>
-        <p>Get weather infomration of your desired city</p>
+        <p>Get weather infomration of your desired location</p>
         <Row>
           <Col>
             <Form.Control
               type="text"
-              placeholder="Enter City"
+              placeholder="Enter location"
               onChange={(e) => {
-                setLocation(e.target.value);
+                setLocation(e.target.value.toString());
                 setWeather(null);
                 reset();
               }}
@@ -131,7 +131,7 @@ export default function App() {
         {weather && weather.cod != '200' && (
           <section className="result">
             <Alert variant="danger">
-              <h3> City {location} not found! </h3>
+              <p> City {location} not found! </p>
             </Alert>
           </section>
         )}

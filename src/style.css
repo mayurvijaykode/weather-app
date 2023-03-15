@@ -30,3 +30,7 @@ main {
   font-size: 32px;
   font-family: Roboto;
 }
+
+input {
+  text-transform: capitalize;
+}
