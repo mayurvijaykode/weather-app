@@ -7,3 +7,5 @@
 - React
 - React Bootstrap
 - OpenWeather API
+
+## Suppot

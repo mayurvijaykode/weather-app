@@ -68,57 +68,59 @@ export default function App() {
   };
 
   return (
-    <Container>
-      <h1>Weather App</h1>
-      <p>Get weather infomration of your desired location</p>
-      <Row>
-        <Col>
-          <Form.Control
-            type="text"
-            placeholder="Enter Location"
-            onChange={(e) => {
-              setLocation(e.target.value);
-              setWeather(null);
-              reset();
-            }}
-          />
-        </Col>
-
-        <Col>
-          <Button variant="primary" onClick={onSearch}>
-            Search
-          </Button>
-        </Col>
-      </Row>
-
-      <Row>
-        {clear && <i className="fas  fa-sun icon"></i>}
-        {rain && <i className="fas fa-cloud-rain icon"></i>}
-        {cloud && <i className="fas fa-cloud-sun icon"></i>}
-        {snow && <i className=" fas fa-snowflake icon"></i>}
-      </Row>
-
-      {weather && (
+    <main>
+      <Container>
+        <h1>Weather App</h1>
+        <p>Get weather infomration of your desired location</p>
         <Row>
           <Col>
-            <Col>
-              <i className="fas fa-water"></i> <span>Humidity </span>
-            </Col>
-            <Col>{weather && <span>{weather?.main?.humidity}%</span>}</Col>
+            <Form.Control
+              type="text"
+              placeholder="Enter Location"
+              onChange={(e) => {
+                setLocation(e.target.value);
+                setWeather(null);
+                reset();
+              }}
+            />
           </Col>
+
           <Col>
-            <Col>
-              <i className="fas fa-wind"></i>
-              <span>Wind </span>
-            </Col>
-            <Col>
-              {' '}
-              <span>{weather?.wind?.speed} km/h</span>
-            </Col>
+            <Button variant="primary" onClick={onSearch}>
+              Search
+            </Button>
           </Col>
         </Row>
-      )}
-      {/* <code>{JSON.stringify(weather, null, 2)}</code> */}
-    </Container>
+
+        <Row>
+          {clear && <i className="fas  fa-sun icon"></i>}
+          {rain && <i className="fas fa-cloud-rain icon"></i>}
+          {cloud && <i className="fas fa-cloud-sun icon"></i>}
+          {snow && <i className=" fas fa-snowflake icon"></i>}
+        </Row>
+
+        {weather && (
+          <Row>
+            <Col>
+              <Col>
+                <i className="fas fa-water"></i> <span>Humidity </span>
+              </Col>
+              <Col>{weather && <span>{weather?.main?.humidity}%</span>}</Col>
+            </Col>
+            <Col>
+              <Col>
+                <i className="fas fa-wind"></i>
+                <span>Wind </span>
+              </Col>
+              <Col>
+                {' '}
+                <span>{weather?.wind?.speed} km/h</span>
+              </Col>
+            </Col>
+          </Row>
+        )}
+        {/* <code>{JSON.stringify(weather, null, 2)}</code> */}
+      </Container>
+    </main>
   );
 }

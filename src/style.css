@@ -6,3 +6,8 @@ p {
 .icon {
   font-size: 100px;
 }
+
+main {
+  margin: 0 auto;
+  width: 70vh;
+}
