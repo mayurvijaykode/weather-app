@@ -14,63 +14,49 @@ const APIKey = 'bde9d434aae08ecaf12cf048a0847bab';
 export default function App() {
   const [location, setLocation] = useState('');
   const [weather, setWeather] = useState(null);
-  const [cloud, setCloud] = useState(false);
-  const [rain, setRain] = useState(false);
-  const [clear, setClear] = useState(false);
-  const [snow, setSnow] = useState(false);
+  const [weatherImage, setWeatherImage] = useState('');
   let weatherHint = '';
 
   const getWeatherDetails = async () => {
-    // console.info(location);
     let response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${APIKey}`
     );
     let json = await response.json();
-    // console.log(weather);
     setWeather(json);
-    // console.log(weather);
-  };
-
-  const reset = () => {
-    setClear(false);
-    setCloud(false);
-    setRain(false);
-    setSnow(false);
   };
 
   const onSearch = () => {
     getWeatherDetails();
-    weatherHint = weather && weather?.weather[0]?.main;
+  };
+
+  useEffect(() => {
+    weatherHint = weather && weather?.weather[0].main;
+
+    console.log(`for ${location} weather hint is ${weatherHint}`);
 
     switch (weatherHint) {
       case 'Clouds':
-        reset();
-        setCloud(true);
+        setWeatherImage('fa-cloud-sun');
         break;
       case 'Clear':
-        reset();
-        setClear(true);
+        setWeatherImage('fa-sun');
         break;
       case 'Rain':
-        reset();
-        setRain(true);
+        setWeatherImage('fa-cloud-rain');
         break;
       case 'Snow':
-        reset();
-        setSnow(true);
+        setWeatherImage('fa-snowflake');
         break;
 
       default:
-        reset();
-        setClear(true);
         break;
     }
-  };
+  }, [weather, location]);
 
   return (
     <main>
-      <Container style={{ maxWidth: '400px' }}>
-        <h1 style={{ textAlign: 'center' }}>Weather App</h1>
+      <Container style={{ width: '500px' }}>
+        <h1>Weather App</h1>
         <p>Get weather infomration of your desired location</p>
         <Row>
           <Col>
@@ -80,7 +66,6 @@ export default function App() {
               onChange={(e) => {
                 setLocation(e.target.value.toString());
                 setWeather(null);
-                reset();
               }}
             />
           </Col>
@@ -91,17 +76,12 @@ export default function App() {
             </Button>
           </Col>
         </Row>
-
         {weather && weather.cod == '200' && (
           <section className="result">
             <Row>
               <Col xs="12">
                 <div className="center">
-                  {clear && <i className="fas fa-sun icon"></i>}
-                  {rain && <i className="fas fa-cloud-rain icon"></i>}
-                  {cloud && <i className="fas fa-cloud-sun icon"></i>}
-                  {snow && <i className=" fas fa-snowflake icon"></i>}
-
+                  <i className={`fas icon ${weatherImage}`}> </i>
                   <h1>
                     {Math.round(weather?.main?.temp)}
                     <span className="celsius1"> &#8451; </span>
@@ -127,7 +107,6 @@ export default function App() {
             </Row>
           </section>
         )}
-
         {weather && weather.cod != '200' && (
           <section className="result">
             <Alert variant="danger">
@@ -135,7 +114,10 @@ export default function App() {
             </Alert>
           </section>
         )}
-        {/* <code>{weather && JSON.stringify(weather, null, 2)}</code> */}
+        {/* <code>
+          {weatherImage}
+          {weather && JSON.stringify(weather.weather, null, 2)}
+        </code> */}
       </Container>
     </main>
   );
