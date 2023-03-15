@@ -1,6 +1,6 @@
 # Weather App
 
-This is a simple weather app designed to give you accurate weather information of you desired location.
+This is a simple weather app designed to give you accurate weather information of your desired location.
 
 # Demo
 
