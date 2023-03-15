@@ -5,9 +5,28 @@ p {
 }
 .icon {
   font-size: 100px;
+  margin-bottom: 2vh;
 }
 
 main {
   margin: 0 auto;
   width: 70vh;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.celsius {
+  font-size: 32px;
+  font-family: Roboto;
 }

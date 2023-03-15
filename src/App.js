@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 
 // import axios from 'axios';
 
@@ -40,7 +41,6 @@ export default function App() {
   const onSearch = () => {
     getWeatherDetails();
     weatherHint = weather && weather?.weather[0]?.main;
-    // console.log(weatherHint);
 
     switch (weatherHint) {
       case 'Clouds':
@@ -71,12 +71,12 @@ export default function App() {
     <main>
       <Container>
         <h1>Weather App</h1>
-        <p>Get weather infomration of your desired location</p>
+        <p>Get weather infomration of your desired city</p>
         <Row>
           <Col>
             <Form.Control
               type="text"
-              placeholder="Enter Location"
+              placeholder="Enter City"
               onChange={(e) => {
                 setLocation(e.target.value);
                 setWeather(null);
@@ -92,34 +92,50 @@ export default function App() {
           </Col>
         </Row>
 
-        <Row>
-          {clear && <i className="fas  fa-sun icon"></i>}
-          {rain && <i className="fas fa-cloud-rain icon"></i>}
-          {cloud && <i className="fas fa-cloud-sun icon"></i>}
-          {snow && <i className=" fas fa-snowflake icon"></i>}
-        </Row>
+        {weather && weather.cod == '200' && (
+          <section className="result">
+            <Row>
+              <Col xs="12">
+                <div className="center">
+                  {clear && <i className="fas fa-sun icon"></i>}
+                  {rain && <i className="fas fa-cloud-rain icon"></i>}
+                  {cloud && <i className="fas fa-cloud-sun icon"></i>}
+                  {snow && <i className=" fas fa-snowflake icon"></i>}
 
-        {weather && (
-          <Row>
-            <Col>
-              <Col>
-                <i className="fas fa-water"></i> <span>Humidity </span>
-              </Col>
-              <Col>{weather && <span>{weather?.main?.humidity}%</span>}</Col>
-            </Col>
-            <Col>
-              <Col>
-                <i className="fas fa-wind"></i>
-                <span>Wind </span>
+                  <h1>
+                    {Math.round(weather?.main?.temp)}
+                    <span className="celsius1"> &#8451; </span>
+                  </h1>
+                </div>
               </Col>
               <Col>
-                {' '}
-                <span>{weather?.wind?.speed} km/h</span>
+                <Col>
+                  <i className="fas fa-water"></i> <span>Humidity </span>
+                </Col>
+                <Col>{weather && <span>{weather?.main?.humidity}%</span>}</Col>
               </Col>
-            </Col>
-          </Row>
+              <Col>
+                <Col>
+                  <i className="fas fa-wind"></i>
+                  <span>Wind </span>
+                </Col>
+                <Col>
+                  {' '}
+                  <span>{weather?.wind?.speed} km/h</span>
+                </Col>
+              </Col>
+            </Row>
+          </section>
         )}
-        {/* <code>{JSON.stringify(weather, null, 2)}</code> */}
+
+        {weather && weather.cod != '200' && (
+          <section className="result">
+            <Alert variant="danger">
+              <h3> City {location} not found! </h3>
+            </Alert>
+          </section>
+        )}
+        {/* <code>{weather && JSON.stringify(weather, null, 2)}</code> */}
       </Container>
     </main>
   );
