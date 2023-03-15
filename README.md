@@ -1,10 +1,10 @@
 # weather-app
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-ucw6ks)
+This is a simple weather app designed to give you accurate weather information of you desired location.
 
 # Demo
 
-Working Demo is here: https://react-ucw6ks.stackblitz.io
+Weather app is here: https://react-ucw6ks.stackblitz.io
 
 ## Technology
 
